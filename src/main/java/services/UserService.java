@@ -20,8 +20,11 @@ public class UserService implements Serializable{
     }
 
 
-    public User Add(User user)
+    public User Add(String username, String password)
     {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
         return managerAccess.Add(user);
     }
 

@@ -83,4 +83,18 @@ public class UsersController implements Serializable {
         }
         context.addCallbackParam("loggedIn", loggedIn);
     }
+
+    public void register(ActionEvent event) throws IOException {
+        User user = userService.getByUsername(username);
+
+        if(user == null && username != null && password != null) {
+            userService.Add(username, password);
+            System.out.println("user created successfully");
+        } else {
+            System.out.println("user not created");
+        }
+
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.redirect(context.getRequestContextPath() + "/login.xhtml");
+    }
 }
