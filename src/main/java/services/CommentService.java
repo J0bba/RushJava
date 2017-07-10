@@ -5,6 +5,7 @@ import dao.ManagerAccess;
 import entities.Comment;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import java.util.List;
 
@@ -14,30 +15,30 @@ import java.util.List;
 @ApplicationScoped
 public class CommentService {
     @Inject
-    private ManagerAccess managerAccess;
+    private Instance<ManagerAccess> managerAccess;
 
     public Comment Add(Comment comment)
     {
-        return managerAccess.Add(comment);
+        return managerAccess.get().Add(comment);
     }
 
     public boolean Delete(Comment comment)
     {
-        return managerAccess.Delete(comment);
+        return managerAccess.get().Delete(comment);
     }
 
     public boolean Update(Comment comment)
     {
-        return managerAccess.Update(comment);
+        return managerAccess.get().Update(comment);
     }
 
     public List getList()
     {
-        return managerAccess.getList(Comment.class);
+        return managerAccess.get().getList(Comment.class);
     }
 
     public Comment getById(int id)
     {
-        return managerAccess.getById(Comment.class, id);
+        return managerAccess.get().getById(Comment.class, id);
     }
 }

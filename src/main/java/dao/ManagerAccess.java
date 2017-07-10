@@ -4,6 +4,7 @@ package dao;
 import entities.User;
 import lombok.Data;
 
+import javax.annotation.Priority;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Any;

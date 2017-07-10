@@ -11,7 +11,7 @@
 <f:view>
     <ui:include src="/header.xhtml" />
 
-    <p:dataTable id="table" var="blog" value="#{blogsController.listOfUser()}">
+    <p:dataTable id="table" var="blog" value="#{blogsController.getListOfUser()}">
         <p:column headerText="Name">
             <h:outputText value="#{blog.name}" />
         </p:column>

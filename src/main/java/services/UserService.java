@@ -6,6 +6,7 @@ import entities.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
@@ -13,10 +14,10 @@ import java.util.List;
 @SessionScoped
 public class UserService implements Serializable{
     @Inject
-    private UserAccess managerAccess;
+    private Instance<UserAccess> managerAccess;
 
     public List getList() {
-        return managerAccess.getList(User.class);
+        return managerAccess.get().getList(User.class);
     }
 
 
@@ -25,26 +26,26 @@ public class UserService implements Serializable{
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        return managerAccess.Add(user);
+        return managerAccess.get().Add(user);
     }
 
     public boolean Update(User user)
     {
-        return managerAccess.Update(user);
+        return managerAccess.get().Update(user);
     }
 
     public boolean Delete(User user)
     {
-        return managerAccess.Delete(user);
+        return managerAccess.get().Delete(user);
     }
 
     public User getById(int id)
     {
-        return managerAccess.getById(User.class, id);
+        return managerAccess.get().getById(User.class, id);
     }
 
     public User getByUsername(String username)
     {
-        return managerAccess.getByUsername(username);
+        return managerAccess.get().getByUsername(username);
     }
 }

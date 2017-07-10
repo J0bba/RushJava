@@ -4,6 +4,7 @@ import dao.ManagerAccess;
 import entities.Post;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import java.util.List;
 
@@ -13,30 +14,30 @@ import java.util.List;
 @ApplicationScoped
 public class PostService {
     @Inject
-    private ManagerAccess managerAccess;
+    private Instance<ManagerAccess> managerAccess;
 
     public Post Add(Post post)
     {
-        return managerAccess.Add(post);
+        return managerAccess.get().Add(post);
     }
 
     public boolean Delete(Post post)
     {
-        return managerAccess.Delete(post);
+        return managerAccess.get().Delete(post);
     }
 
     public boolean Update(Post post)
     {
-        return managerAccess.Update(post);
+        return managerAccess.get().Update(post);
     }
 
     public List getList()
     {
-        return managerAccess.getList(Post.class);
+        return managerAccess.get().getList(Post.class);
     }
 
     public Post getById(int id)
     {
-        return managerAccess.getById(Post.class, id);
+        return managerAccess.get().getById(Post.class, id);
     }
 }

@@ -5,6 +5,7 @@ import org.primefaces.context.RequestContext;
 import services.UserService;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -20,11 +21,11 @@ import java.util.List;
 @Named
 public class UsersController implements Serializable {
     @Inject
-    private UserService userService;
+    private Instance<UserService> userService;
 
     public List getList()
     {
-        return userService.getList();
+        return userService.get().getList();
     }
 
     private String username;
@@ -54,7 +55,7 @@ public class UsersController implements Serializable {
         RequestContext context = RequestContext.getCurrentInstance();
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         boolean loggedIn = false;
-        User user = userService.getByUsername(username);
+        User user = userService.get().getByUsername(username);
 
         if (user == null)
         {
@@ -96,10 +97,10 @@ public class UsersController implements Serializable {
     }
 
     public void register(ActionEvent event) throws IOException {
-        User user = userService.getByUsername(username);
+        User user = userService.get().getByUsername(username);
 
         if(user == null && username != null && password != null) {
-            userService.Add(username, password);
+            userService.get().Add(username, password);
             System.out.println("user created successfully");
         } else {
             System.out.println("user not created");
