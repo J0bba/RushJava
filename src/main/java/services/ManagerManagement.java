@@ -5,6 +5,10 @@ import dao.ManagerAccess;
 public class ManagerManagement {
 
     private ManagerAccess managerAccess;
+    public ManagerManagement()
+    {
+        managerAccess = new ManagerAccess();
+    }
 
     public <T> T Add(T obj)
     {

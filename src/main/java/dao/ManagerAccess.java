@@ -3,19 +3,26 @@ package dao;
 
 import lombok.Data;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Data
+@ApplicationScoped
 public class ManagerAccess {
     @PersistenceContext(unitName = "blogster")
     private EntityManager em;
 
+    @Transactional
     public <T> T Add(T obj)
     {
+        System.out.println(em == null ? "null" : "not null");
         return em.merge(obj);
     }
 
+    @Transactional
     public <T> boolean Delete(T obj)
     {
         try {
@@ -27,6 +34,7 @@ public class ManagerAccess {
         }
     }
 
+    @Transactional
     public <T> boolean Update(T obj)
     {
         try {
@@ -36,5 +44,12 @@ public class ManagerAccess {
         {
             return false;
         }
+    }
+
+    @Transactional
+    public <T> List getList(T type)
+    {
+        return em.createQuery("select a from " + type.getClass().getSimpleName() + " a")
+                .getResultList();
     }
 }

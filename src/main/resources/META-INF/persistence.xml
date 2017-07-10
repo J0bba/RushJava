@@ -4,8 +4,5 @@
              version="2.1">
     <persistence-unit name="blogster" transaction-type="JTA">
         <jta-data-source>java:/Blogster</jta-data-source>
-        <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-        </properties>
     </persistence-unit>
 </persistence>
