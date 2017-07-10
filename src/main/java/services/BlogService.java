@@ -32,6 +32,10 @@ public class BlogService {
 
     public List getList()
     {
-        return managerAccess.getList(new Blog());
+        return managerAccess.getList(Blog.class);
+    }
+
+    public Blog getById(int id) {
+        return managerAccess.getById(Blog.class, id);
     }
 }

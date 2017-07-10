@@ -33,6 +33,11 @@ public class CommentService {
 
     public List getList()
     {
-        return managerAccess.getList(new Comment());
+        return managerAccess.getList(Comment.class);
+    }
+
+    public Comment getById(int id)
+    {
+        return managerAccess.getById(Comment.class, id);
     }
 }

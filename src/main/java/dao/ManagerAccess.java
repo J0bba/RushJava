@@ -1,19 +1,26 @@
 package dao;
 
 
+import entities.User;
 import lombok.Data;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-@ApplicationScoped
-public class ManagerAccess {
+@SessionScoped
+@Any
+public class ManagerAccess implements Serializable{
     @PersistenceContext(unitName = "blogster")
-    private EntityManager em;
+    protected EntityManager em;
 
     @Transactional
     public <T> T Add(T obj)
@@ -46,9 +53,15 @@ public class ManagerAccess {
     }
 
     @Transactional
-    public <T> List getList(T type)
+    public <T> List getList(Class<T> type)
     {
-        return em.createQuery("select a from " + type.getClass().getSimpleName() + " a")
+        return em.createQuery("select a from " + type.getSimpleName() + " a")
                 .getResultList();
+    }
+
+    @Transactional
+    public <T> T getById(Class<T> type, int id)
+    {
+        return em.find(type, id);
     }
 }

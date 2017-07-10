@@ -1,20 +1,24 @@
 package services;
 
 import dao.ManagerAccess;
+import dao.UserAccess;
 import entities.User;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.List;
 
-@ApplicationScoped
-public class UserService  {
+@SessionScoped
+public class UserService implements Serializable{
     @Inject
-    private ManagerAccess managerAccess;
+    private UserAccess managerAccess;
 
     public List getList() {
-        return managerAccess.getList(new User());
+        return managerAccess.getList(User.class);
     }
+
 
     public User Add(User user)
     {
@@ -29,5 +33,15 @@ public class UserService  {
     public boolean Delete(User user)
     {
         return managerAccess.Delete(user);
+    }
+
+    public User getById(int id)
+    {
+        return managerAccess.getById(User.class, id);
+    }
+
+    public User getByUsername(String username)
+    {
+        return managerAccess.getByUsername(username);
     }
 }

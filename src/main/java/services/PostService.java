@@ -32,6 +32,11 @@ public class PostService {
 
     public List getList()
     {
-        return managerAccess.getList(new Post());
+        return managerAccess.getList(Post.class);
+    }
+
+    public Post getById(int id)
+    {
+        return managerAccess.getById(Post.class, id);
     }
 }
