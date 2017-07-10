@@ -9,15 +9,19 @@ import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
 import javax.inject.Named;
+import javax.inject.Qualifier;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.util.List;
 
 @Data
 @SessionScoped
-@Any
 public class ManagerAccess implements Serializable{
     @PersistenceContext(unitName = "blogster")
     protected EntityManager em;

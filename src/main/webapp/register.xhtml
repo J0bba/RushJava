@@ -6,6 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <f:view>
+    <ui:include src="/header.xhtml" />
     <h:form>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 
@@ -18,8 +19,7 @@
                 <p:password id="password" value="#{usersController.password}" required="true" label="password" />
 
                 <f:facet name="footer">
-                    <p:commandButton value="Register" update="growl" actionListener="#{usersController.register}"
-                                     oncomplete="handleLoginRequest(xhr, status, args)" />
+                    <p:commandButton value="Register" update="growl" actionListener="#{usersController.register}"/>
                 </f:facet>
             </h:panelGrid>
         </p:dialog>

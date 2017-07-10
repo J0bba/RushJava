@@ -84,6 +84,17 @@ public class UsersController implements Serializable {
         context.addCallbackParam("loggedIn", loggedIn);
     }
 
+    public void logout()
+    {
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        HttpSession session = (HttpSession) context.getSession(false);
+        if (session.getAttribute("user_id") != null && session.getAttribute("username") != null)
+        {
+            session.removeAttribute("user_id");
+            session.removeAttribute("username");
+        }
+    }
+
     public void register(ActionEvent event) throws IOException {
         User user = userService.getByUsername(username);
 

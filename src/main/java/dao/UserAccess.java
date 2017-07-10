@@ -4,6 +4,8 @@ import entities.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.inject.Named;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
