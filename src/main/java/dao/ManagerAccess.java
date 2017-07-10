@@ -18,7 +18,6 @@ public class ManagerAccess {
     @Transactional
     public <T> T Add(T obj)
     {
-        System.out.println(em == null ? "null" : "not null");
         return em.merge(obj);
     }
 

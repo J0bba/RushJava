@@ -10,7 +10,7 @@
 </h:head>
 <f:view>
     <h:form>
-    <p:dataTable id="table" var="user" value="#{prout.getList()}">
+    <p:dataTable id="table" var="user" value="#{usersController.getList()}">
         <p:column headerText="Id">
             <h:outputText value="#{user.id}" />
         </p:column>
