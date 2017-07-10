@@ -15,4 +15,19 @@ public class UserService  {
     public List getList() {
         return managerAccess.getList(new User());
     }
+
+    public User Add(User user)
+    {
+        return managerAccess.Add(user);
+    }
+
+    public boolean Update(User user)
+    {
+        return managerAccess.Update(user);
+    }
+
+    public boolean Delete(User user)
+    {
+        return managerAccess.Delete(user);
+    }
 }
