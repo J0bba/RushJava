@@ -4,13 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <f:view>
+    <c:if test="#{not empty session.getAttribute('user_id')}">
+        #{ facesContext.externalContext.redirect(externalContext.getRequestContextPath())}
+    </c:if>
+    <c:if test="#{not empty session.getAttribute('error_message')}">
+        <p style="color:red">#{session.getAttribute('error_message')}</p>
+    </c:if>
     <h:form>
-        <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
-            <p:graphicImage name="/demo/images/login.png" />
-        </h:outputLink>
-
         <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 
         <p:dialog header="Login" widgetVar="dlg" resizable="false">
@@ -28,17 +31,5 @@
             </h:panelGrid>
         </p:dialog>
     </h:form>
-
-    <script type="text/javascript">
-        function handleLoginRequest(xhr, status, args) {
-            if(args.validationFailed || !args.loggedIn) {
-                PF('dlg').jq.effect("shake", {times:5}, 100);
-            }
-            else {
-                PF('dlg').hide();
-                $('#loginLink').fadeOut();
-            }
-        }
-    </script>
 </f:view>
 </html>

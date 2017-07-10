@@ -6,10 +6,13 @@ import services.UserService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -28,6 +31,8 @@ public class UsersController implements Serializable {
 
     private String password;
 
+    private String message;
+
     public String getUsername() {
         return username;
     }
@@ -44,27 +49,38 @@ public class UsersController implements Serializable {
         this.password = password;
     }
 
+
     public void login(ActionEvent event) {
         RequestContext context = RequestContext.getCurrentInstance();
-        FacesMessage message = null;
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         boolean loggedIn = false;
         User user = userService.getByUsername(username);
+
         if (user == null)
         {
-            //ERROR
-        }
-
-        if(username != null && username.equals("admin") && password != null && password.equals("admin")) {
-            loggedIn = true;
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);
-            System.out.println("Ca marche hahahahahaha");
-        } else {
-            System.out.println("Ca marche pas hahahahahaha");
+            session.setAttribute("error_message", "Username does not exists");
             loggedIn = false;
-            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
         }
-
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        else
+        {
+            if (!user.getPassword().equals(password))
+            {
+                loggedIn = false;
+                session.setAttribute("error_message", "Invalid Username/Password combination");
+            }
+            else
+            {
+                loggedIn = true;
+                session.setAttribute("user_id", user.getId());
+                session.setAttribute("username", user.getUsername());
+                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+                try {
+                    externalContext.redirect(externalContext.getRequestContextPath());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         context.addCallbackParam("loggedIn", loggedIn);
     }
 }
