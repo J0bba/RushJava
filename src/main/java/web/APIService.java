@@ -25,13 +25,6 @@ public class APIService {
 
     @Inject
     private Instance<PostAccess> postAccess;
-/*
-    @GET
-    @Path("/blogs")
-    public String getBlogs() {
-        Gson objGson = new GsonBuilder().setPrettyPrinting().create();
-        return objGson.toJson(blogAccess.get().getList(Blog.class));
-    }*/
 
     @GET
     @Path("/blogs")

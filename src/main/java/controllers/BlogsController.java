@@ -40,6 +40,9 @@ public class BlogsController implements Serializable {
 
     private Blog curr_blog;
 
+    /**
+     * Récupère la liste des blogs pour l'utilisateur stocké en session
+     */
     public List<Blog> getListByUser()
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -54,6 +57,11 @@ public class BlogsController implements Serializable {
         }
     }
 
+    /**
+     * Met à jour les données locales de blog et
+     * redirige vers la page du blog sélectionné.
+     * @param blog : le blog vers lequel aller
+     */
     public void goToBlogPage(Blog blog) throws IOException {
         this.curr_blog = blog;
 
@@ -61,11 +69,19 @@ public class BlogsController implements Serializable {
         context.redirect(context.getRequestContextPath() + "/blog.xhtml");
     }
 
+    /**
+     * Récupère la liste des posts relatifs à un blog
+     * @param blog : le blog que l'on veut récupérer
+     */
     public List<Post> getListPost (Blog blog)
     {
         return postService.get().getListByBlogId(blog.getId());
     }
 
+    /**
+     * Permet d'archiver un blog
+     * @param blog : le blog à archiver
+     */
     public void archiveBlog(Blog blog) throws IOException {
         blogService.get().Archive(blog);
         curr_blog = null;
@@ -73,6 +89,9 @@ public class BlogsController implements Serializable {
         context.redirect(context.getRequestContextPath() + "/");
     }
 
+    /**
+     * Récupère une liste de tous les blogs
+     */
     public List<Blog> getListAll()
     {
         return blogService.get().getList();
