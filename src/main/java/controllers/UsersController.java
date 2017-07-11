@@ -19,7 +19,7 @@ import java.util.List;
 
 @ApplicationScoped
 @Named
-public class UsersController implements Serializable {
+public class UsersController{
     @Inject
     private Instance<UserService> userService;
 
