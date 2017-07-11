@@ -37,7 +37,7 @@ public class ManagerAccess implements Serializable{
     public <T> boolean Delete(T obj)
     {
         try {
-            em.remove(obj);
+            em.remove(em.contains(obj) ? obj : em.merge(obj));
             return true;
         }catch (Exception e)
         {

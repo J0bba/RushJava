@@ -11,6 +11,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -56,5 +57,16 @@ public class PostsController {
 
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         context.redirect(context.getRequestContextPath() + "/post.xhtml");
+    }
+
+    public void removeComment(Comment comment)
+    {
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        commentService.get().Delete(comment);
+        try {
+            context.redirect(((HttpServletRequest) context.getRequest()).getRequestURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
