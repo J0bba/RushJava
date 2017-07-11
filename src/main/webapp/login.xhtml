@@ -12,10 +12,12 @@
     <c:if test="#{not empty session.getAttribute('user_id')}">
         #{ facesContext.externalContext.redirect(externalContext.getRequestContextPath())}
     </c:if>
-    <c:if test="#{not empty session.getAttribute('error_message')}">
-        <p style="color:red">#{session.getAttribute('error_message')}</p>
-    </c:if>
     <h:form>
+        <c:if test="#{not empty session.getAttribute('error_message')}">
+            <p:panel>
+                <h:outputText style="color: red" value="#{session.getAttribute('error_message')}"/>
+            </p:panel>
+        </c:if>
         <p:panel>
             <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 
@@ -29,5 +31,6 @@
                 </h:panelGrid>
         </p:panel>
     </h:form>
+    <ui:include src="footer.xhtml"/>
 </h:body>
 </html>

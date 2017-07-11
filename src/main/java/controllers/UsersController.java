@@ -54,6 +54,7 @@ public class UsersController implements Serializable {
         RequestContext context = RequestContext.getCurrentInstance();
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         boolean loggedIn = false;
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         User user = userService.get().getByUsername(username);
 
         if (user == null)
@@ -73,7 +74,6 @@ public class UsersController implements Serializable {
                 loggedIn = true;
                 session.setAttribute("user_id", user.getId());
                 session.setAttribute("username", user.getUsername());
-                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
                 try {
                     externalContext.redirect(externalContext.getRequestContextPath());
                 } catch (IOException e) {
