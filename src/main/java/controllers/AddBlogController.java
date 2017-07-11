@@ -47,6 +47,7 @@ public class AddBlogController {
         Blog newBlog = new Blog();
         newBlog.setName(blogName);
         newBlog.setUser(curr_user);
+        newBlog.setActive(true);
         blogService.get().Add(newBlog);
 
         try {

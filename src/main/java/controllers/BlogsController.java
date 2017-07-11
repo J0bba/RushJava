@@ -74,4 +74,9 @@ public class BlogsController {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         context.redirect(context.getRequestContextPath() + "/");
     }
+
+    public List<Blog> getListAll()
+    {
+        return blogService.get().getList();
+    }
 }

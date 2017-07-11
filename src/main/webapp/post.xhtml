@@ -28,18 +28,20 @@
             </c:if>
         </p>
     </ui:repeat>
-    <h:form>
-        <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-        <p:dialog header="Add a comment :" widgetVar="dlg" resizable="false">
-            <h:panelGrid columns="1" cellpadding="5">
-                <h:outputLabel for="commentText" />
-                <p:inputText id="commentText" value="#{addCommentController.commentText}" required="true" label="commentText" />
+    <c:if test="#{not empty session.getAttribute('user_id')}">
+        <h:form>
+            <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+            <p:dialog header="Add a comment :" widgetVar="dlg" resizable="false">
+                <h:panelGrid columns="1" cellpadding="5">
+                    <h:outputLabel for="commentText" />
+                    <p:inputText id="commentText" value="#{addCommentController.commentText}" required="true" label="commentText" />
 
-                <f:facet name="footer">
-                    <p:commandButton value="Comment" update="growl" actionListener="#{addCommentController.AddComment(postsController.curr_post)}"/>
-                </f:facet>
-            </h:panelGrid>
-        </p:dialog>
-    </h:form>
+                    <f:facet name="footer">
+                        <p:commandButton value="Comment" update="growl" actionListener="#{addCommentController.AddComment(postsController.curr_post)}"/>
+                    </f:facet>
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+    </c:if>
 </f:view>
 </html>
