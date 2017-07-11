@@ -26,6 +26,10 @@ public class APIService {
     @Inject
     private Instance<PostAccess> postAccess;
 
+    /**
+     * Récupère la liste totale des nom de chaque blog
+     * @return : le JSON des blogs
+     */
     @GET
     @Path("/blogs")
     public String getBlogs() {
@@ -43,6 +47,11 @@ public class APIService {
         return "";
     }
 
+    /**
+     * Récupère la liste totale des nom de chaque posts relatifs à un blog
+     * @param id : l'identifiant du blog
+     * @return : le JSON formatté des posts
+     */
     @GET
     @Path("/blogs/{id}")
     public String getPosts(@PathParam("id") int id) {
