@@ -27,6 +27,7 @@ public class AddCommentController implements Serializable {
     @Inject
     private Instance<UserService> userService;
 
+
     public String getCommentText() {
         return commentText;
     }
@@ -37,6 +38,10 @@ public class AddCommentController implements Serializable {
 
     private String commentText;
 
+    /**
+     * Récupère les informations du commentaire et l'ajoute en base de données
+     * @param curr_post : Post courant pour lequel ajouter un commentaire
+     */
     public void AddComment(Post curr_post)
     {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();

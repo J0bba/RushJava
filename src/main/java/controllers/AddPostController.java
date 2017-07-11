@@ -29,7 +29,10 @@ public class AddPostController implements Serializable {
     private String postName;
     private String data;
 
-
+    /**
+     * Créer un post et l'enregistre en base de donnée gràce au form
+     * @param curr_blog : Le blog actuel dans lequel ajouter le post
+     */
     public void AddPost(Blog curr_blog)
     {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
@@ -51,19 +54,30 @@ public class AddPostController implements Serializable {
         }
     }
 
-
+    /**
+     * Getter pour postName
+     */
     public String getPostName() {
         return postName;
     }
 
+    /**
+     * Setter pour postName
+     */
     public void setPostName(String postName) {
         this.postName = postName;
     }
 
+    /**
+     * Getter pour Data
+     */
     public String getData() {
         return data;
     }
 
+    /**
+     * Setter pour Data
+     */
     public void setData(String data) {
         this.data = data;
     }

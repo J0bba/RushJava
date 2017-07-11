@@ -35,6 +35,9 @@ public class AddBlogController implements Serializable {
 
     private String blogName;
 
+    /**
+     * Récupère les informatons du blog de la vue et l'ajoute en base de données.
+     */
     public void AddBlog()
     {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
