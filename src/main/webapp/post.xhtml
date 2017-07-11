@@ -8,6 +8,7 @@
 <f:view>
     <ui:include src="/header.xhtml" />
     <h1>#{postsController.curr_post.name}</h1>
+    <p>#{postsController.curr_post.data}</p>
     <p:dataTable id="table" var="comment" value="#{postsController.getListComment(postsController.curr_post)}">
         <p:column headerText="User">
             <p:column headerText="Name">

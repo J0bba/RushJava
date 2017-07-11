@@ -16,7 +16,7 @@
                 <p:inputText id="postName" value="#{addPostController.postName}" required="true" label="postName" />
 
                 <h:outputLabel for="data" value="Content :" />
-                <p:inputText id="data" value="#{addPostController.data}" required="true" label="data" />
+                <p:inputTextarea id="data" value="#{addPostController.data}" required="true" label="data" />
 
                 <f:facet name="footer">
                     <p:commandButton value="Submit" update="growl" actionListener="#{addPostController.AddPost(blogsController.curr_blog)}"/>
