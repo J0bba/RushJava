@@ -42,7 +42,7 @@ public class BlogsController {
 
     private Blog curr_blog;
 
-    public List<Blog> getListOfUser()
+    public List<Blog> getListByUser()
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         if (session.getAttribute("user_id") != null) {
@@ -66,5 +66,12 @@ public class BlogsController {
     public List<Post> getListPost (Blog blog)
     {
         return postService.get().getListByBlogId(blog.getId());
+    }
+
+    public void archiveBlog(Blog blog) throws IOException {
+        blogService.get().Archive(blog);
+        curr_blog = null;
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.redirect(context.getRequestContextPath() + "/");
     }
 }

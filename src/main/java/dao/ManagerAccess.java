@@ -49,7 +49,7 @@ public class ManagerAccess implements Serializable{
     public <T> boolean Update(T obj)
     {
         try {
-            obj = em.merge(obj);
+            em.merge(obj);
             return true;
         } catch (Exception e)
         {

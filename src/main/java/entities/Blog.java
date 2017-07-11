@@ -15,6 +15,14 @@ public class Blog {
     @Column
     private String name;
 
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     @Column
     private Boolean active;
 
