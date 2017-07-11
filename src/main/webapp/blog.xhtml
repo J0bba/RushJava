@@ -4,9 +4,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <f:view>
     <ui:include src="/header.xhtml" />
     <h:outputText value="#{blogsController.curr_blog.name}" />
+
+    <p:dataTable id="table" var="post" value="#{blogsController.getListPost(blogsController.curr_blog)}">
+
+        <h:form>
+            <h:commandLink action="#{postsController.goToPostPage(blogsController.curr_blog, post)}">
+                <p:column headerText="Name">
+                    <h:outputText value="#{post.name}" />
+                </p:column>
+                <p:column headerText="Date">
+                    <h:outputText value="#{post.date}" />
+                </p:column>
+            </h:commandLink>
+        </h:form>
+    </p:dataTable>
 </f:view>
 </html>

@@ -1,9 +1,10 @@
 package controllers;
 
-import dao.BlogAccess;
 import entities.Blog;
+import entities.Post;
 import entities.User;
 import services.BlogService;
+import services.PostService;
 import services.UserService;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -13,7 +14,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,9 @@ public class BlogsController {
     @Inject
     private Instance<BlogService> blogService;
     @Inject
-    private Instance<UserService> userServices;
+    private Instance<UserService> userService;
+    @Inject
+    private Instance<PostService> postService;
 
     public Blog getCurr_blog() {
         return curr_blog;
@@ -45,7 +47,7 @@ public class BlogsController {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         if (session.getAttribute("user_id") != null) {
             int user_id = (int) session.getAttribute("user_id");
-            User user = userServices.get().getById(user_id);
+            User user = userService.get().getById(user_id);
             return blogService.get().getListByUserId(user);
         }
         else
@@ -59,5 +61,10 @@ public class BlogsController {
 
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         context.redirect(context.getRequestContextPath() + "/blog.xhtml");
+    }
+
+    public List<Post> getListPost (Blog blog)
+    {
+        return postService.get().getListByBlogId(blog.getId());
     }
 }

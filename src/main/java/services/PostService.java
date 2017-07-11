@@ -1,6 +1,5 @@
 package services;
 
-import dao.ManagerAccess;
 import dao.PostAccess;
 import entities.Post;
 
@@ -15,30 +14,35 @@ import java.util.List;
 @ApplicationScoped
 public class PostService {
     @Inject
-    private Instance<PostAccess> managerAccess;
+    private Instance<PostAccess> postAccess;
 
     public Post Add(Post post)
     {
-        return managerAccess.get().Add(post);
+        return postAccess.get().Add(post);
     }
 
     public boolean Delete(Post post)
     {
-        return managerAccess.get().Delete(post);
+        return postAccess.get().Delete(post);
     }
 
     public boolean Update(Post post)
     {
-        return managerAccess.get().Update(post);
+        return postAccess.get().Update(post);
     }
 
     public List getList()
     {
-        return managerAccess.get().getList(Post.class);
+        return postAccess.get().getList(Post.class);
     }
 
     public Post getById(int id)
     {
-        return managerAccess.get().getById(Post.class, id);
+        return postAccess.get().getById(Post.class, id);
+    }
+
+    public List<Post> getListByBlogId(int blog_id)
+    {
+        return postAccess.get().getListByBlogId(blog_id);
     }
 }
