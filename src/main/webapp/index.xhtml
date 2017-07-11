@@ -13,7 +13,11 @@
 
     <p:dataTable id="table" var="blog" value="#{blogsController.getListOfUser()}">
         <p:column headerText="Name">
-            <h:outputText value="#{blog.name}" />
+            <h:form>
+                <h:commandLink action="#{blogsController.goToBlogPage(blog)}">
+                    <h:outputText value="#{blog.name}" />
+                </h:commandLink>
+            </h:form>
         </p:column>
     </p:dataTable>
 </f:view>
