@@ -31,6 +31,9 @@ public class Post {
     @ManyToOne (cascade = CascadeType.ALL)
     private Blog blog;
 
+    @OneToMany (cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
     public Integer getId() {
         return id;
     }

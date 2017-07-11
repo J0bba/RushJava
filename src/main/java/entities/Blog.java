@@ -15,8 +15,14 @@ public class Blog {
     @Column
     private String name;
 
+    @Column
+    private Boolean active;
+
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
+
+    @OneToMany (cascade = CascadeType.ALL)
+    private List<Post> posts;
 
     public Integer getId() {
         return id;
