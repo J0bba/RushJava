@@ -70,7 +70,7 @@ public class PostsController {
             e.printStackTrace();
         }
     }
-    
+
     public void archivePost(Post post) throws IOException {
         postService.get().Archive(post);
         curr_post = null;
