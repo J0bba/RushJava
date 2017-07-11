@@ -51,6 +51,12 @@ public class PostsController implements Serializable {
         return commentService.get().getListByPost(post);
     }
 
+    /**
+     * Met à jour les données locales de post et de blog et
+     * redirige vers la page du post sélectionné.
+     * @param curr_blog : le blog actuel
+     * @param post : le post vers lequel aller
+     */
     public void goToPostPage(Blog curr_blog, Post post) throws IOException {
         this.curr_blog = curr_blog;
         this.curr_post = post;
@@ -59,6 +65,10 @@ public class PostsController implements Serializable {
         context.redirect(context.getRequestContextPath() + "/post.xhtml");
     }
 
+    /**
+     * Supprime le commentaire précisé
+     * @param comment : le commentaire à supprimer
+     */
     public void removeComment(Comment comment) {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         commentService.get().Delete(comment);
@@ -69,6 +79,10 @@ public class PostsController implements Serializable {
         }
     }
 
+    /**
+     * Permet d'archiver le post précisé
+     * @param post : le post a archiver
+     */
     public void archivePost(Post post) throws IOException {
         postService.get().Archive(post);
         curr_post = null;

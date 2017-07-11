@@ -50,6 +50,13 @@ public class UsersController implements Serializable {
     }
 
 
+    /**
+     *
+     * Récupère les données stockées dans la classe et compare les résultats
+     * face à la base de donnée. Si les identifiants sont corrects, la session
+     * stocke user_id et username.
+     * Sinon, ca renvoie sur la même page avec une erreur.
+     */
     public void login(ActionEvent event) {
         RequestContext context = RequestContext.getCurrentInstance();
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
