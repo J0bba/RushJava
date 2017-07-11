@@ -4,9 +4,8 @@ import entities.User;
 import org.primefaces.context.RequestContext;
 import services.UserService;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Instance;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -17,9 +16,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-@ApplicationScoped
+@SessionScoped
 @Named
-public class UsersController{
+public class UsersController implements Serializable {
     @Inject
     private Instance<UserService> userService;
 

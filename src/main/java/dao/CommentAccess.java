@@ -3,16 +3,14 @@ package dao;
 import entities.Comment;
 import entities.Post;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.persistence.NoResultException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Thiba on 11/07/2017.
- */
-@ApplicationScoped
-public class CommentAccess extends ManagerAccess {
+@SessionScoped
+public class CommentAccess extends ManagerAccess implements Serializable {
     public List<Comment> getListByPost(Post post)
     {
         try {
