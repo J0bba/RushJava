@@ -26,10 +26,10 @@ public class Blog {
     @Column
     private Boolean active;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
-    @OneToMany (cascade = CascadeType.ALL)
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Post> posts;
 
     public Integer getId() {
@@ -54,5 +54,13 @@ public class Blog {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
