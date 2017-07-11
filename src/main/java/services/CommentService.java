@@ -2,21 +2,17 @@ package services;
 
 
 import dao.CommentAccess;
-import dao.ManagerAccess;
-import dao.PostAccess;
 import entities.Comment;
 import entities.Post;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Thiba on 10/07/2017.
- */
-@ApplicationScoped
-public class CommentService {
+@SessionScoped
+public class CommentService implements Serializable {
     @Inject
     private Instance<CommentAccess> managerAccess;
 

@@ -1,14 +1,12 @@
 package controllers;
 
-import dao.PostAccess;
-import dao.UserAccess;
 import entities.Blog;
 import entities.Post;
 import entities.User;
 import services.PostService;
 import services.UserService;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Instance;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -16,14 +14,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by Thiba on 11/07/2017.
- */
-@ApplicationScoped
+@SessionScoped
 @Named
-public class AddPostController {
+public class AddPostController implements Serializable {
     @Inject
     private Instance<PostService> postService;
 

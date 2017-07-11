@@ -3,16 +3,14 @@ package services;
 import dao.PostAccess;
 import entities.Post;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Thiba on 10/07/2017.
- */
-@ApplicationScoped
-public class PostService {
+@SessionScoped
+public class PostService implements Serializable {
     @Inject
     private Instance<PostAccess> postAccess;
 

@@ -1,10 +1,8 @@
 package services;
 
-import dao.ManagerAccess;
 import dao.UserAccess;
 import entities.User;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
@@ -12,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @SessionScoped
-public class UserService implements Serializable{
+public class UserService implements Serializable {
     @Inject
     private Instance<UserAccess> managerAccess;
 

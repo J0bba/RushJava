@@ -6,7 +6,7 @@ import entities.Post;
 import services.CommentService;
 import services.PostService;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Instance;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -14,14 +14,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Thiba on 11/07/2017.
- */
-@ApplicationScoped
+@SessionScoped
 @Named
-public class PostsController {
+public class PostsController implements Serializable {
 
     @Inject
     private Instance<PostService> postService;

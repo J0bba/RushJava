@@ -1,19 +1,16 @@
 package dao;
 
-import javax.enterprise.context.ApplicationScoped;
 import entities.Post;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Thiba on 11/07/2017.
- */
-@ApplicationScoped
-public class PostAccess  extends ManagerAccess{
+@SessionScoped
+public class PostAccess extends ManagerAccess implements Serializable {
 
     @Transactional
     public void Archive(Post post)
