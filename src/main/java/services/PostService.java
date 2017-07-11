@@ -45,4 +45,9 @@ public class PostService {
     {
         return postAccess.get().getListByBlogId(blog_id);
     }
+
+    public void Archive(Post post)
+    {
+        postAccess.get().Archive(post);
+    }
 }

@@ -6,7 +6,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
-
 <f:view>
     <ui:include src="/header.xhtml" />
     <h1>#{postsController.curr_post.name}</h1>
@@ -35,12 +34,18 @@
                 <h:panelGrid columns="1" cellpadding="5">
                     <h:outputLabel for="commentText" />
                     <p:inputText id="commentText" value="#{addCommentController.commentText}" required="true" label="commentText" />
-
                     <f:facet name="footer">
                         <p:commandButton value="Comment" update="growl" actionListener="#{addCommentController.AddComment(postsController.curr_post)}"/>
                     </f:facet>
                 </h:panelGrid>
             </p:dialog>
+        </h:form>
+    </c:if>
+    <c:if test="#{session.getAttribute('user_id') == postsController.curr_post.user.id}">
+        <h:form>
+            <h:commandLink action="#{postsController.archivePost(postsController.curr_post)}">
+                Archiver ce post
+            </h:commandLink>
         </h:form>
     </c:if>
 </f:view>
