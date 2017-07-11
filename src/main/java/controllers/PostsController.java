@@ -4,6 +4,7 @@ import entities.Blog;
 import entities.Comment;
 import entities.Post;
 import services.CommentService;
+import services.PostService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
@@ -22,6 +23,8 @@ import java.util.List;
 @Named
 public class PostsController {
 
+    @Inject
+    private Instance<PostService> postService;
     @Inject
     private Instance<CommentService> commentService;
 
@@ -50,7 +53,6 @@ public class PostsController {
         return commentService.get().getListByPost(post);
     }
 
-
     public void goToPostPage(Blog curr_blog, Post post) throws IOException {
         this.curr_blog = curr_blog;
         this.curr_post = post;
@@ -59,8 +61,7 @@ public class PostsController {
         context.redirect(context.getRequestContextPath() + "/post.xhtml");
     }
 
-    public void removeComment(Comment comment)
-    {
+    public void removeComment(Comment comment) {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         commentService.get().Delete(comment);
         try {
@@ -68,5 +69,12 @@ public class PostsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void archivePost(Post post) throws IOException {
+        postService.get().Archive(post);
+        curr_post = null;
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.redirect(context.getRequestContextPath() + "/blog.xhtml");
     }
 }
