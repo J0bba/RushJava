@@ -2,15 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
-<f:view>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
     <ui:include src="redirect_login.xhtml"/>
     <ui:include src="header.xhtml"/>
     <h:form>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-        <p:dialog header="Add a post" widgetVar="dlg" resizable="false">
+        <p:panel header="Add a post">
             <h:panelGrid columns="2" cellpadding="5">
                 <h:outputLabel for="postName" value="Name:" />
                 <p:inputText id="postName" value="#{addPostController.postName}" required="true" label="postName" />
@@ -18,11 +19,9 @@
                 <h:outputLabel for="data" value="Content :" />
                 <p:inputTextarea id="data" value="#{addPostController.data}" required="true" label="data" />
 
-                <f:facet name="footer">
-                    <p:commandButton value="Submit" update="growl" actionListener="#{addPostController.AddPost(blogsController.curr_blog)}"/>
-                </f:facet>
+                <p:commandButton value="Submit" update="growl" actionListener="#{addPostController.AddPost(blogsController.curr_blog)}"/>
             </h:panelGrid>
-        </p:dialog>
+        </p:panel>
     </h:form>
-</f:view>
+</h:body>
 </html>

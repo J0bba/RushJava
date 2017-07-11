@@ -2,51 +2,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
-<f:view>
+<h:head>
+</h:head>
+<h:body>
     <ui:include src="/header.xhtml" />
-    <h1>#{postsController.curr_post.name}</h1>
-    <p>#{postsController.curr_post.data}</p>
-    <p>Comments :</p>
-    <ui:repeat value="#{postsController.getListComment(postsController.curr_post)}" var="comment">
-        <c:set value="#{session.getAttribute('user_id') == postsController.curr_post.user.id}" var="test"/>
-        <p>
-            <h:outputText value="#{test}"/>
-            <h:outputText value="#{comment.data}" />
-            <br/>
-            <h:outputText value="#{comment.user.username}" /> - <h:outputText value="#{comment.date}" />
-            <c:if test="#{test}">
-                <h:form>
-                    <h:commandLink action="#{postsController.removeComment(comment)}">
-                        <h:outputText value="Delete comment" />
-                    </h:commandLink>
-                </h:form>
-            </c:if>
-        </p>
-    </ui:repeat>
-    <c:if test="#{not empty session.getAttribute('user_id')}">
-        <h:form>
-            <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-            <p:dialog header="Add a comment :" widgetVar="dlg" resizable="false">
-                <h:panelGrid columns="1" cellpadding="5">
-                    <h:outputLabel for="commentText" />
-                    <p:inputText id="commentText" value="#{addCommentController.commentText}" required="true" label="commentText" />
-                    <f:facet name="footer">
-                        <p:commandButton value="Comment" update="growl" actionListener="#{addCommentController.AddComment(postsController.curr_post)}"/>
-                    </f:facet>
-                </h:panelGrid>
-            </p:dialog>
-        </h:form>
-    </c:if>
+    <p:panel header="#{postsController.curr_post.name}">
+        <h:outputText value="#{postsController.curr_post.data}"/>
+    </p:panel>
+    <p:panel header="Comments :">
+        <ui:repeat value="#{postsController.getListComment(postsController.curr_post)}" var="comment">
+            <p:panel>
+            <c:set value="#{session.getAttribute('user_id') == postsController.curr_post.user.id}" var="test"/>
+            <p>
+                <h:outputText value="#{comment.data}" />
+                <br/>
+                <h:outputText value="#{comment.user.username}" /> - <h:outputText value="#{comment.date}" />
+                <c:if test="#{test}">
+                        <h:form>
+                            <h:commandLink action="#{postsController.removeComment(comment)}">
+                                <p:button value="Delete comment" />
+                            </h:commandLink>
+                        </h:form>
+                </c:if>
+            </p>
+            </p:panel>
+        </ui:repeat>
+        <c:if test="#{not empty session.getAttribute('user_id')}">
+            <h:form>
+                <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                <p:panel>
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <h:outputLabel for="commentText" />
+                        <p:inputText id="commentText" value="#{addCommentController.commentText}" required="true" label="commentText" />
+                        <p:commandButton value="Add a comment" update="growl" actionListener="#{addCommentController.AddComment(postsController.curr_post)}"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </c:if>
+    </p:panel>
     <c:if test="#{session.getAttribute('user_id') == postsController.curr_post.user.id}">
         <h:form>
             <h:commandLink action="#{postsController.archivePost(postsController.curr_post)}">
-                Archiver ce post
+                <p:button value="Archiver le post"/>
             </h:commandLink>
         </h:form>
     </c:if>
-</f:view>
+</h:body>
 </html>
