@@ -8,17 +8,26 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 </h:head>
-<f:view>
+<h:body>
     <ui:include src="/header.xhtml" />
-
-    <p:dataTable id="table" var="blog" value="#{blogsController.getListByUser()}">
-        <p:column headerText="Name">
-            <h:form>
-                <h:commandLink action="#{blogsController.goToBlogPage(blog)}">
-                    <h:outputText value="#{blog.name}" />
-                </h:commandLink>
-            </h:form>
-        </p:column>
-    </p:dataTable>
-</f:view>
+    <c:choose>
+        <c:when test="#{empty session.getAttribute('user_id')}">
+            <c:set value="#{blogsController.getListAll()}" var="data"/>
+        </c:when>
+        <c:otherwise>
+            <c:set value="#{blogsController.getListByUser()}" var="data"/>
+        </c:otherwise>
+    </c:choose>
+    <p:panel header="Liste de vos blogs :">
+        <ui:repeat value="#{data}" var="blog">
+            <p:panel>
+                <h:form>
+                    <h:commandLink action="#{blogsController.goToBlogPage(blog)}">
+                        #{blog.name}
+                    </h:commandLink>
+                </h:form>
+            </p:panel>
+        </ui:repeat>
+    </p:panel>
+</h:body>
 </html>

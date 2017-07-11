@@ -9,7 +9,10 @@
 </h:head>
 <h:body>
     <ui:include src="/header.xhtml" />
-    <p:panel header="#{blogsController.curr_blog.name}">
+    <c:if test="#{not empty session.getAttribute('user_id')}">
+        <a href="add_post.xhtml"><p:button value="Add a post"/></a>
+    </c:if>
+    <p:panel header="Blog : #{blogsController.curr_blog.name}">
         <h:outputText value="Liste des post :"/>
         <br/>
 

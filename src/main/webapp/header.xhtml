@@ -12,13 +12,11 @@
     <c:choose>
         <c:when test="#{not empty session.getAttribute('user_id')}">
             <li style="display: inline">
+                <a href="gallery.xhtml">Gallery</a>
+            </li>
+            <li style="display: inline">
                 <a href="add_blog.xhtml">Add a blog</a>
             </li>
-            <c:if test="#{session.getAttribute('user_id') == blogsController.curr_blog.user.id}">
-                <li style="display: inline">
-                    <a href="add_post.xhtml">Add a post</a>
-                </li>
-            </c:if>
             <li style="display: inline">
                 <a href="logout.xhtml">Logout</a>
             </li>

@@ -9,7 +9,7 @@
 </h:head>
 <h:body>
     <ui:include src="/header.xhtml" />
-    <p:panel header="#{postsController.curr_post.name}">
+    <p:panel header="Post : #{postsController.curr_post.name}">
         <h:outputText value="#{postsController.curr_post.data}"/>
     </p:panel>
     <p:panel header="Comments :">
