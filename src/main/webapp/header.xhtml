@@ -15,6 +15,11 @@
                 <li style="display: inline">
                     <a href="add_blog.xhtml">Add a blog</a>
                 </li>
+                <c:if test="#{session.getAttribute('user_id') == blogsController.curr_blog.user.id}">
+                    <li style="display: inline">
+                        <a href="add_post.xhtml">Add a post</a>
+                    </li>
+                </c:if>
                 <li style="display: inline">
                     <a href="logout.xhtml">Logout</a>
                 </li>

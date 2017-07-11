@@ -1,6 +1,7 @@
 package services;
 
 import dao.ManagerAccess;
+import dao.PostAccess;
 import entities.Post;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -14,7 +15,7 @@ import java.util.List;
 @ApplicationScoped
 public class PostService {
     @Inject
-    private Instance<ManagerAccess> managerAccess;
+    private Instance<PostAccess> managerAccess;
 
     public Post Add(Post post)
     {
